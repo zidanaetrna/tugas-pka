@@ -9,32 +9,18 @@ SciPy 1.10.1, Matplotlib 3.7.5.
 
 ## Menjalankan dengan Docker
 
-Yang dibutuhkan hanya Docker (Docker Desktop di Windows/macOS). Image tersedia di GitHub Container
-Registry: `ghcr.io/zidanaetrna/pka-knn-missing-values` (publik, tidak perlu login).
+Yang dibutuhkan hanya Docker (Docker Desktop di Windows/macOS). Image tersedia di Docker Hub:
+[`zidanaetrna/pka-knn-missing-values`](https://hub.docker.com/r/zidanaetrna/pka-knn-missing-values)
+(cerminan yang sama juga ada di `ghcr.io/zidanaetrna/pka-knn-missing-values:1.0`).
 
-### Cara tercepat (tanpa clone repo)
-
-```bash
-docker pull ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
-docker run --rm -p 8080:8080 ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
-```
-
-Untuk menyimpan hasil ke folder `hasil/` di komputer sendiri, tambahkan volume:
+### Cara 1: docker run
 
 ```bash
-# Linux/macOS
-docker run --rm -p 8080:8080 -v "$(pwd)/hasil:/app/hasil" ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
-# Windows PowerShell
-docker run --rm -p 8080:8080 -v "${PWD}/hasil:/app/hasil" ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
+docker pull zidanaetrna/pka-knn-missing-values:1.0
+docker run -d -p 8080:8080 --name pka-knn zidanaetrna/pka-knn-missing-values:1.0
 ```
 
-Uji cepat (3-fold x 1 ulangan, sekitar 2 menit):
-
-```bash
-docker run --rm -p 8080:8080 -e EKSPERIMEN_ARGS=--quick ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
-```
-
-### Dengan docker compose
+### Cara 2: docker compose
 
 Dari folder repo ini (atau cukup salin file `docker-compose.yml`):
 
@@ -46,9 +32,10 @@ docker compose up -d
 
 Buka **http://localhost:8080**. Selama eksperimen berjalan, halaman menampilkan progres dan memuat
 ulang otomatis. Setelah selesai, halaman menampilkan tabel hasil dan grafik. Eksperimen penuh
-memakan waktu sekitar 10-30 menit, tergantung CPU.
+memakan waktu sekitar 5-20 menit, tergantung jumlah inti CPU.
 
-Semua hasil juga tersimpan di folder `hasil/` di samping `docker-compose.yml`:
+Dengan Cara 2, semua hasil juga tersimpan di folder `hasil/` di samping `docker-compose.yml`
+(Cara 1: salin dengan `docker cp pka-knn:/app/hasil ./hasil`):
 
 | Berkas | Isi |
 |---|---|
@@ -63,8 +50,10 @@ Semua hasil juga tersimpan di folder `hasil/` di samping `docker-compose.yml`:
 Perintah lain:
 
 ```bash
-docker compose logs -f          # melihat log eksperimen
-docker compose down             # menghentikan container
+docker logs -f pka-knn                # melihat progres di terminal
+docker cp pka-knn:/app/hasil ./hasil  # menyalin berkas hasil (Cara 1)
+docker stop pka-knn                   # menghentikan container (Cara 1)
+docker compose down                   # menghentikan container (Cara 2)
 ```
 
 Jika folder `hasil/` sudah berisi hasil, container langsung menampilkannya tanpa menjalankan ulang.
@@ -93,7 +82,7 @@ src/eksperimen.py        seluruh eksperimen
 src/laporan_html.py      halaman hasil dan halaman progres
 src/serve.py             entrypoint container (menjalankan eksperimen lalu menyajikan hasil di port 8080)
 contoh_hasil/            hasil run penuh sebagai pembanding
-.github/workflows/       GitHub Actions untuk build dan push image ke GHCR
+.github/workflows/       GitHub Actions untuk build dan push image
 Dockerfile
 docker-compose.yml
 requirements.txt
@@ -101,11 +90,12 @@ requirements.txt
 
 ## Untuk kelompok: build dan push image
 
-Image di-build dan di-push otomatis ke GitHub Container Registry oleh GitHub Actions
-(`.github/workflows/docker-publish.yml`) setiap ada push ke branch `main`, untuk platform
-`linux/amd64` dan `linux/arm64` (Apple Silicon). Bisa juga dijalankan manual dari tab
-**Actions > Build dan push image ke GitHub Container Registry > Run workflow**. Tidak perlu token
-tambahan; workflow memakai `GITHUB_TOKEN` bawaan.
+Image di-build dan di-push otomatis oleh GitHub Actions (`.github/workflows/docker-publish.yml`)
+setiap ada push ke branch `main`, untuk platform `linux/amd64` dan `linux/arm64` (Apple Silicon),
+ke Docker Hub (`zidanaetrna/pka-knn-missing-values`) dan GHCR
+(`ghcr.io/zidanaetrna/pka-knn-missing-values`). Bisa juga dijalankan manual dari tab
+**Actions > Build dan push image Docker > Run workflow**.
 
-Setelah push pertama, pastikan package-nya **Public** (Profile > Packages > pka-knn-missing-values >
-Package settings > Change visibility) agar dosen dapat melakukan pull tanpa login.
+Push ke Docker Hub membutuhkan secret `DOCKERHUB_TOKEN` (Personal Access Token Docker Hub dengan
+akses Read & Write) di Settings > Secrets and variables > Actions. Tanpa secret itu, image hanya
+di-push ke GHCR.

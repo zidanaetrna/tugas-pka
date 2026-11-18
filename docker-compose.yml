@@ -1,7 +1,7 @@
 services:
   eksperimen:
-    image: ghcr.io/zidanaetrna/pka-knn-missing-values:1.0
-    container_name: pka-knn-missing-values
+    image: zidanaetrna/pka-knn-missing-values:1.0
+    container_name: pka-knn
     ports:
       - "8080:8080"
     volumes:
