@@ -10,14 +10,14 @@ SciPy 1.10.1, Matplotlib 3.7.5.
 ## Menjalankan dengan Docker
 
 Yang dibutuhkan hanya Docker (Docker Desktop di Windows/macOS). Image tersedia di Docker Hub:
-[`zidanaetrna/pka-knn-missing-values`](https://hub.docker.com/r/zidanaetrna/pka-knn-missing-values)
+[`itsaetrna/pka-knn-missing-values`](https://hub.docker.com/r/itsaetrna/pka-knn-missing-values)
 (cerminan yang sama juga ada di `ghcr.io/zidanaetrna/pka-knn-missing-values:1.0`).
 
 ### Cara 1: docker run
 
 ```bash
-docker pull zidanaetrna/pka-knn-missing-values:1.0
-docker run -d -p 8080:8080 --name pka-knn zidanaetrna/pka-knn-missing-values:1.0
+docker pull itsaetrna/pka-knn-missing-values:1.0
+docker run -d -p 8080:8080 --name pka-knn itsaetrna/pka-knn-missing-values:1.0
 ```
 
 ### Cara 2: docker compose
@@ -92,7 +92,7 @@ requirements.txt
 
 Image di-build dan di-push otomatis oleh GitHub Actions (`.github/workflows/docker-publish.yml`)
 setiap ada push ke branch `main`, untuk platform `linux/amd64` dan `linux/arm64` (Apple Silicon),
-ke Docker Hub (`zidanaetrna/pka-knn-missing-values`) dan GHCR
+ke Docker Hub (`itsaetrna/pka-knn-missing-values`) dan GHCR
 (`ghcr.io/zidanaetrna/pka-knn-missing-values`). Bisa juga dijalankan manual dari tab
 **Actions > Build dan push image Docker > Run workflow**.
 
