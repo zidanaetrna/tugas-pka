@@ -1,0 +1,224 @@
+{
+  "info": {
+    "baris": 767,
+    "positif": 268,
+    "persen_positif": 34.94132985658409,
+    "nol_per_variabel": {
+      "Glucose": 5,
+      "BloodPressure": 35,
+      "Insulin": 373,
+      "BMI": 11,
+      "SkinThickness": 227
+    },
+    "baris_lengkap_4_variabel": 392,
+    "outer": "10-fold x 3 ulangan",
+    "inner": "5-fold stratified",
+    "grid_kombinasi": 100
+  },
+  "waktu_detik": 996,
+  "tabel_performa": [
+    {
+      "Skenario": "Tanpa penanganan",
+      "Akurasi nested CV (%)": 75.4,
+      "SD (pp)": 3.86,
+      "Selisih (pp)": null,
+      "p": null,
+      "F1": 0.575,
+      "Recall": 0.485,
+      "AUC": 0.811,
+      "Akurasi hold-out (%)": 74.03
+    },
+    {
+      "Skenario": "Hapus baris",
+      "Akurasi nested CV (%)": 75.18,
+      "SD (pp)": 6.23,
+      "Selisih (pp)": null,
+      "p": null,
+      "F1": 0.53,
+      "Recall": 0.438,
+      "AUC": 0.833,
+      "Akurasi hold-out (%)": 77.22
+    },
+    {
+      "Skenario": "Mean",
+      "Akurasi nested CV (%)": 75.54,
+      "SD (pp)": 4.01,
+      "Selisih (pp)": 0.14,
+      "p": 0.913,
+      "F1": 0.594,
+      "Recall": 0.523,
+      "AUC": 0.823,
+      "Akurasi hold-out (%)": 70.78
+    },
+    {
+      "Skenario": "Median",
+      "Akurasi nested CV (%)": 75.58,
+      "SD (pp)": 3.93,
+      "Selisih (pp)": 0.18,
+      "p": 0.882,
+      "F1": 0.592,
+      "Recall": 0.519,
+      "AUC": 0.826,
+      "Akurasi hold-out (%)": 70.78
+    },
+    {
+      "Skenario": "Median + indikator",
+      "Akurasi nested CV (%)": 75.06,
+      "SD (pp)": 4.06,
+      "Selisih (pp)": -0.34,
+      "p": 0.718,
+      "F1": 0.57,
+      "Recall": 0.49,
+      "AUC": 0.81,
+      "Akurasi hold-out (%)": 73.38
+    },
+    {
+      "Skenario": "KNN Imputer",
+      "Akurasi nested CV (%)": 75.45,
+      "SD (pp)": 4.12,
+      "Selisih (pp)": 0.05,
+      "p": 0.97,
+      "F1": 0.6,
+      "Recall": 0.537,
+      "AUC": 0.826,
+      "Akurasi hold-out (%)": 74.03
+    },
+    {
+      "Skenario": "MICE",
+      "Akurasi nested CV (%)": 75.58,
+      "SD (pp)": 5.04,
+      "Selisih (pp)": 0.18,
+      "p": 0.903,
+      "F1": 0.599,
+      "Recall": 0.529,
+      "AUC": 0.825,
+      "Akurasi hold-out (%)": 73.38
+    },
+    {
+      "Skenario": "MICE + SkinThickness",
+      "Akurasi nested CV (%)": 75.75,
+      "SD (pp)": 4.39,
+      "Selisih (pp)": 0.35,
+      "p": 0.783,
+      "F1": 0.618,
+      "Recall": 0.574,
+      "AUC": 0.825,
+      "Akurasi hold-out (%)": 74.68
+    }
+  ],
+  "tabel_grid_search": [
+    {
+      "Skenario": "Tanpa penanganan",
+      "KNN k=5 tanpa grid (%)": 74.06,
+      "Dengan grid (%)": 75.4,
+      "Kenaikan dari grid (pp)": 1.34,
+      "Parameter terbaik (hold-out)": "k=29, uniform, p=2",
+      "Median k (nested)": 32.0,
+      "Rentang k (nested)": "17-49",
+      "Weights terbanyak": "distance (22/30)"
+    },
+    {
+      "Skenario": "Hapus baris",
+      "KNN k=5 tanpa grid (%)": 75.94,
+      "Dengan grid (%)": 75.18,
+      "Kenaikan dari grid (pp)": -0.76,
+      "Parameter terbaik (hold-out)": "k=19, uniform, p=1",
+      "Median k (nested)": 27.0,
+      "Rentang k (nested)": "5-45",
+      "Weights terbanyak": "uniform (23/30)"
+    },
+    {
+      "Skenario": "Mean",
+      "KNN k=5 tanpa grid (%)": 73.79,
+      "Dengan grid (%)": 75.54,
+      "Kenaikan dari grid (pp)": 1.75,
+      "Parameter terbaik (hold-out)": "k=37, distance, p=2",
+      "Median k (nested)": 35.0,
+      "Rentang k (nested)": "13-49",
+      "Weights terbanyak": "uniform (20/30)"
+    },
+    {
+      "Skenario": "Median",
+      "KNN k=5 tanpa grid (%)": 73.66,
+      "Dengan grid (%)": 75.58,
+      "Kenaikan dari grid (pp)": 1.92,
+      "Parameter terbaik (hold-out)": "k=35, distance, p=2",
+      "Median k (nested)": 29.0,
+      "Rentang k (nested)": "13-49",
+      "Weights terbanyak": "uniform (18/30)"
+    },
+    {
+      "Skenario": "Median + indikator",
+      "KNN k=5 tanpa grid (%)": 73.32,
+      "Dengan grid (%)": 75.06,
+      "Kenaikan dari grid (pp)": 1.74,
+      "Parameter terbaik (hold-out)": "k=39, distance, p=2",
+      "Median k (nested)": 24.0,
+      "Rentang k (nested)": "9-49",
+      "Weights terbanyak": "distance (20/30)"
+    },
+    {
+      "Skenario": "KNN Imputer",
+      "KNN k=5 tanpa grid (%)": 74.48,
+      "Dengan grid (%)": 75.45,
+      "Kenaikan dari grid (pp)": 0.96,
+      "Parameter terbaik (hold-out)": "k=31, uniform, p=1",
+      "Median k (nested)": 26.0,
+      "Rentang k (nested)": "13-49",
+      "Weights terbanyak": "uniform (20/30)"
+    },
+    {
+      "Skenario": "MICE",
+      "KNN k=5 tanpa grid (%)": 73.62,
+      "Dengan grid (%)": 75.58,
+      "Kenaikan dari grid (pp)": 1.96,
+      "Parameter terbaik (hold-out)": "k=35, uniform, p=2",
+      "Median k (nested)": 27.0,
+      "Rentang k (nested)": "15-47",
+      "Weights terbanyak": "uniform (23/30)"
+    },
+    {
+      "Skenario": "MICE + SkinThickness",
+      "KNN k=5 tanpa grid (%)": 74.49,
+      "Dengan grid (%)": 75.75,
+      "Kenaikan dari grid (pp)": 1.26,
+      "Parameter terbaik (hold-out)": "k=41, distance, p=2",
+      "Median k (nested)": 23.0,
+      "Rentang k (nested)": "7-45",
+      "Weights terbanyak": "uniform (20/30)"
+    }
+  ],
+  "tabel_rmse_imputasi": [
+    {
+      "Metode": "MICE",
+      "RMSE rata-rata": 0.842,
+      "SD": 0.048
+    },
+    {
+      "Metode": "KNN Imputer",
+      "RMSE rata-rata": 0.949,
+      "SD": 0.056
+    },
+    {
+      "Metode": "Mean",
+      "RMSE rata-rata": 1.009,
+      "SD": 0.056
+    },
+    {
+      "Metode": "Median",
+      "RMSE rata-rata": 1.019,
+      "SD": 0.063
+    }
+  ],
+  "baris_lengkap_rmse": 392,
+  "p_recall_vs_tanpa": {
+    "Mean": 0.213,
+    "Median": 0.278,
+    "KNN Imputer": 0.028,
+    "MICE": 0.154
+  },
+  "median_per_kelas_tidak_valid": {
+    "akurasi": 84.06,
+    "selisih_pp": 8.66
+  }
+}

@@ -1,0 +1,5 @@
+Metode,RMSE rata-rata,SD
+MICE,0.842,0.048
+KNN Imputer,0.949,0.056
+Mean,1.009,0.056
+Median,1.019,0.063

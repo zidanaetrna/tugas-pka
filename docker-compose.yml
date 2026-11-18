@@ -1,0 +1,13 @@
+services:
+  eksperimen:
+    image: zidanaetrna/pka-knn-missing-values:1.0
+    container_name: pka-knn-missing-values
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./hasil:/app/hasil
+    environment:
+      # 1 = jalankan ulang eksperimen walaupun folder hasil/ sudah berisi
+      RERUN: "0"
+      # isi "--quick" untuk uji cepat (3-fold x 1 ulangan), kosongkan untuk eksperimen penuh
+      EKSPERIMEN_ARGS: ""
